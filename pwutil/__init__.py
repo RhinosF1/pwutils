@@ -3,6 +3,7 @@ from hashlib import pbkdf2_hmac
 from os import urandom
 from sqlescapy import sqlescape
 from MarkupSafe import escape
+from pwutils.badpw import PWLIST
 
 INVPWMSG = 'Inputted password was invalid'
 
@@ -26,10 +27,8 @@ def validate_password(password):
     password = str(password)
     if len(password) < 8:
         raise ValueError(INVPWMSG)
-    with open('10-million-password-list-top-500.txt', 'r') as badpwlist:
-        rejectpwlist = str(badpwlist.read()).split('\n')
-        if password in rejectpwlist:
-            raise ValueError(INVPWMSG)
+    if password in PWLIST:
+        raise ValueError(INVPWMSG)
     return password
 
 
