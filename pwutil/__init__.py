@@ -3,7 +3,7 @@ from hashlib import pbkdf2_hmac
 from os import urandom
 from sqlescapy import sqlescape
 from markupsafe import escape
-from pwutils.badpw import PWLIST
+from pwutil.badpw import PWLIST
 
 INVPWMSG = 'Inputted password was invalid'
 
