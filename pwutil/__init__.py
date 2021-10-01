@@ -2,7 +2,7 @@ from binascii import hexlify, unhexlify
 from hashlib import pbkdf2_hmac
 from os import urandom
 from sqlescapy import sqlescape
-from MarkupSafe import escape
+from markupsafe import escape
 from pwutils.badpw import PWLIST
 
 INVPWMSG = 'Inputted password was invalid'
