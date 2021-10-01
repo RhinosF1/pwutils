@@ -18,7 +18,7 @@ username = 'Pycryptor10'
 email = 'Pycryptor10@gmail.com'
 
 setup(
-    name='pwutils',
+    name='pwutil',
     version='0.2.0',
     url='https://github.com/Pycryptor10/pwutils',
     description='Password hashing & validation utility',
