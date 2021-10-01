@@ -1,5 +1,4 @@
-from pwutil import (compare_pw, hash_pw, validate_password,
-                                 validate_username)
+from pwutil import compare_pw, hash_pw, validate_password, validate_username
 
 
 def test_password_compare_success():
