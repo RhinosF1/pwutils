@@ -2,9 +2,9 @@ from binascii import hexlify, unhexlify
 from hashlib import pbkdf2_hmac
 from os import urandom
 from sqlescapy import sqlescape
-from flask import escape
+from MarkupSafe import escape
 
-INVPWMSG = "Inputted password was invalid"
+INVPWMSG = 'Inputted password was invalid'
 
 
 def hash_pw(password):
