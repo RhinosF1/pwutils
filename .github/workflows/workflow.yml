@@ -1,0 +1,87 @@
+on:
+  push:
+    branches:
+      - main
+      - versions
+  pull_request:
+  
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['windows-latest', 'macos-latest', 'ubuntu-latest']
+        python: ['3.6', '3.7', '3.8', '3.9', '3.9-dev', '3.10-dev']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python }} on ${{ matrix.os }} 
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python }}
+    - name: Install Caches (Linux)
+      uses: actions/cache@v2
+      if: startsWith(runner.os, 'Linux')
+      with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+    - name: Install Caches (MacOS)
+      uses: actions/cache@v2
+      if: startsWith(runner.os, 'macOS')
+      with:
+          path: ~/Library/Caches/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+    - name: Install Caches (Windows)
+      uses: actions/cache@v2
+      if: startsWith(runner.os, 'Windows')
+      with:
+          path: ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r dev-requirements.txt
+        pip install .
+    - name: View install data
+      run: |
+        python --version
+        pip --version
+        pip show pwutils
+    - name: Lint with flake8
+      run: flake8 . --max-line-length=175 --ignore=SFS301
+    - name: Run tests
+      run: pytest
+    - name: Build docs
+      run: pdoc --html pwutils --force
+    - name: Verify dependencies
+      run: |
+        pip check
+        pip freeze
+        pipdeptree
+        
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install pypa/build
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev-requirements.txt
+      - name: Build a binary wheel
+        run: pyproject-build --wheel --outdir dist .
+      - name: Publish to PyPi
+        if: github.event_name == 'push' && github.ref == 'refs/heads/versions'
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.pypi_token }}
