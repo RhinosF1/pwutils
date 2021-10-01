@@ -1,4 +1,4 @@
-from epqsource.pwmanager import (compare_pw, hash_pw, validate_password,
+from pwutil import (compare_pw, hash_pw, validate_password,
                                  validate_username)
 
 
