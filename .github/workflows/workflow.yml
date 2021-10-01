@@ -55,7 +55,7 @@ jobs:
         pip --version
         pip show pwutil
     - name: Lint with flake8
-      run: flake8 . --max-line-length=175 --ignore=SFS301
+      run: flake8 . --max-line-length=175 --ignore=SFS301 --exclude=pwutil/badpw.py
     - name: Run tests
       run: pytest
     - name: Build docs
