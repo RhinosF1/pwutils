@@ -53,13 +53,13 @@ jobs:
       run: |
         python --version
         pip --version
-        pip show pwutils
+        pip show pwutil
     - name: Lint with flake8
       run: flake8 . --max-line-length=175 --ignore=SFS301
     - name: Run tests
       run: pytest
     - name: Build docs
-      run: pdoc --html pwutils --force
+      run: pdoc --html pwutil --force
     - name: Verify dependencies
       run: |
         pip check
