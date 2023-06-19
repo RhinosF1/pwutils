@@ -1,4 +1,4 @@
-flake8==4.0.1
+flake8==6.0.0
 pipdeptree==2.9.3
 setuptools==67.8.0
 pytest==6.2.5
