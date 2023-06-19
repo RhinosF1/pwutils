@@ -1,6 +1,6 @@
 flake8==4.0.1
 pipdeptree==2.9.3
-setuptools==60.7.1
+setuptools==67.8.0
 pytest==6.2.5
 wheel==0.40.0
 flake8-return==1.2.0
