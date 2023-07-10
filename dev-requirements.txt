@@ -5,7 +5,7 @@ pytest==7.3.2
 wheel==0.40.0
 flake8-return==1.2.0
 flake8-commas==2.1.0
-flake8-comprehensions==3.13.0
+flake8-comprehensions==3.14.0
 flake8-sfs==0.0.4
 flake8-quotes==3.3.2
 flake8-pytest==1.4
