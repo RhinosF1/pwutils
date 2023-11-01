@@ -6,7 +6,7 @@ wheel==0.40.0
 flake8-return==1.2.0
 flake8-commas==2.1.0
 flake8-comprehensions==3.14.0
-flake8-sfs==0.0.4
+flake8-sfs==1.0.0
 flake8-quotes==3.3.2
 flake8-pytest==1.4
 build==0.10.0
