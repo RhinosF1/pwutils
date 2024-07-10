@@ -11,3 +11,4 @@ flake8-quotes==3.3.2
 flake8-pytest==1.4
 build==0.10.0
 pdoc3==0.10.0
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
